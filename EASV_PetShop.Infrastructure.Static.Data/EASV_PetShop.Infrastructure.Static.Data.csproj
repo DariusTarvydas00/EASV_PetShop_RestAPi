@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>ClassLibrary1Infrastructure</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EASV_PetShop.Core.Entity\EASV_PetShop.Core.Entity.csproj" />
+      <ProjectReference Include="..\EASV_PetShop.Core\EASV_PetShop.Core.csproj" />
+    </ItemGroup>
+
+</Project>
