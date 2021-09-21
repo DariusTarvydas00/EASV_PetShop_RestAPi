@@ -365,23 +365,6 @@ namespace EASV_PetShop.UI
 
         private void InitData()
         {
-            _customerService.CreateCustomer( new Customer
-            {
-                FirstName = "Bob",
-                LastName = "Dylan",
-                Address = "Bongo street 22",
-                Email = "Bob@Dylan.com",
-                PhoneNumber = "123456789"
-            });
-
-            _customerService.CreateCustomer( new Customer
-            {
-                FirstName = "Ding",
-                LastName = "Kong",
-                Address = "Chris Cross street 41",
-                Email = "Donk@Kong.com",
-                PhoneNumber = "987654321"
-            });
 
             _petService.CreatePet(new Pet()
             {

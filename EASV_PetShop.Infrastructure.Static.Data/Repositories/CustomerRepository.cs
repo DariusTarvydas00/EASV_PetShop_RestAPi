@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using EASV_PetShop.Core.DomainService;
 using EASV_PetShop.Core.Entity;
 
@@ -7,19 +8,42 @@ namespace ClassLibrary1Infrastructure.Repositories
     public class CustomerRepository: ICustomerRepository
     {
 
-        private static int _id = 1;
-        private static readonly List<Customer> Customers = new List<Customer>();
+        public CustomerRepository()
+        {
+            if (FakeDB.Customers.Count >= 1) return;
+            var customer1 = new Customer()
+            {
+                Id = FakeDB.id++,
+                FirstName = "Bob",
+                LastName = "Dylan",
+                Address = "Bongo street 22",
+                Email = "Bob@Dylan.com",
+                PhoneNumber = "123456789"
+            };
+            FakeDB.Customers.Add(customer1);
+            
+            var customer2 = new Customer()
+            {
+                Id = FakeDB.id++,
+                FirstName = "Ding",
+                LastName = "Kong",
+                Address = "Chris Cross street 41",
+                Email = "Donk@Kong.com",
+                PhoneNumber = "987654321"
+            };
+            FakeDB.Customers.Add(customer2);
+        }
 
         public Customer Create(Customer customer)
         {
-            customer.Id = _id++;
-            Customers.Add(customer);
+            customer.Id = FakeDB.id++;
+            FakeDB.Customers.Add(customer);
             return customer;
         }
 
         public Customer ReadById(int id)
         {
-            foreach (var customer in Customers)
+            foreach (var customer in FakeDB.Customers)
             {
                 if (customer.Id == id)
                 {
@@ -32,32 +56,29 @@ namespace ClassLibrary1Infrastructure.Repositories
 
         public IEnumerable<Customer> ReadAll()
         {
-            return Customers;
+            return FakeDB.Customers;
         }
 
         public Customer Update(Customer customerUpdate)
         {
-            var customerFromDb = this.ReadById(customerUpdate.Id);
-            if (customerFromDb != null)
-            {
+            var customerFromDb = ReadById(customerUpdate.Id);
+            if (customerFromDb == null) return null;
+            
                 customerFromDb.FirstName = customerUpdate.FirstName;
                 customerFromDb.LastName = customerUpdate.LastName;
                 customerFromDb.Address = customerUpdate.Address;
                 customerFromDb.Email = customerUpdate.Email;
                 customerFromDb.PhoneNumber = customerUpdate.PhoneNumber;
                 return customerFromDb;
-            }
-
-            return null;
         }
 
         public Customer Delete(int id)
         {
-            var customerFound = this.ReadById(id);
+            var customerFound = ReadById(id);
 
             if (customerFound != null)
             {
-                Customers.Remove(customerFound);
+                FakeDB.Customers.Remove(customerFound);
                 return customerFound;
             }
 
