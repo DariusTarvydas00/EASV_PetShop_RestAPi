@@ -9,7 +9,7 @@ namespace ClassLibrary1Infrastructure.Repositories
 
         public PetType Create(PetType petType)
         {
-            petType.Id = FakeDB.id++;
+            petType.Id = FakeDB.petTypeId++;
             FakeDB.PetTypes.Add(petType);
             return petType;
         }

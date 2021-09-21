@@ -25,7 +25,7 @@ namespace EASV_PetShop_RestAPi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Customer> Get(int id)
         {
-            return _customerService.FindCustomerById(id);
+            return _customerService.FindCustomerByIdIncludeOrders(id);
         }
 
         [HttpPut("{id}")]

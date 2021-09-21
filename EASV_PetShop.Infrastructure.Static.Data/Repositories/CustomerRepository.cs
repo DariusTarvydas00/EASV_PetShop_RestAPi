@@ -30,13 +30,7 @@ namespace ClassLibrary1Infrastructure.Repositories
                 Address = "Chris Cross street 41",
                 Email = "Donk@Kong.com",
                 PhoneNumber = "987654321",
-                Pets = new List<Pet>()
-                {
-                    new Pet()
-                    {
-                        Name = "sadfasdf",
-                    }
-                }
+                Pets = new List<Pet>() {new Pet() {Name = "sadfasdf",}}
             };
             FakeDB.Customers.Add(customer2);
         }
@@ -50,15 +44,17 @@ namespace ClassLibrary1Infrastructure.Repositories
 
         public Customer ReadById(int id)
         {
-            foreach (var customer in FakeDB.Customers)
-            {
-                if (customer.Id == id)
-                {
-                    return customer;
-                }
-            }
 
-            return null;
+            return FakeDB.Customers.Select(customer => new Customer()
+            {
+                Id = customer.Id,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Address = customer.Address,
+                Email = customer.Email,
+                PhoneNumber = customer.PhoneNumber,
+                Pets = customer.Pets
+            }).FirstOrDefault(customer => customer.Id == id);
         }
 
         public IEnumerable<Customer> ReadAll()

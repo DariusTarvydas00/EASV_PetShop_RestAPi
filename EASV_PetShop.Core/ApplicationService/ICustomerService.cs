@@ -8,6 +8,7 @@ namespace EASV_PetShop.Core.ApplicationService
         Customer NewCustomer(string firsName, string lastName, string address, string phoneNumber, string email);
         Customer CreateCustomer(Customer customer);
         Customer FindCustomerById(int id);
+        Customer FindCustomerByIdIncludeOrders(int id);
         List<Customer> GetAllCustomers();
         public List<Customer> GetAllByFirstName(string name);
         Customer UpdateCustomer(Customer customerUpdate);

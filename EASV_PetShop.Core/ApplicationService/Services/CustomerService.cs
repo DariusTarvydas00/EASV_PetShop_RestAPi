@@ -8,9 +8,11 @@ namespace EASV_PetShop.Core.ApplicationService.Services
     public class CustomerService: ICustomerService
     {
         readonly ICustomerRepository _customerRepository;
+        readonly IPetRepository _petRepository;
 
-        public CustomerService(ICustomerRepository customerRepository)
+        public CustomerService(ICustomerRepository customerRepository, IPetRepository petRepository)
         {
+            _petRepository = petRepository;
             _customerRepository = customerRepository;
         }
 
@@ -36,6 +38,13 @@ namespace EASV_PetShop.Core.ApplicationService.Services
         public Customer FindCustomerById(int id)
         {
             return _customerRepository.ReadById(id);
+        }
+
+        public Customer FindCustomerByIdIncludeOrders(int id)
+        {
+            var customer = _customerRepository.ReadById(id);
+            customer.Pets = _petRepository.ReadAll().Where(pet => pet.Id == customer.Id).ToList();
+            return customer;
         }
 
         public List<Customer> GetAllCustomers()

@@ -16,11 +16,12 @@ namespace ClassLibrary1Infrastructure.Repositories
             {
                 Id = FakeDB.petId++,
                 Name = "Kaira",
-               // PetType = _petTypeService.NewPetType("Vokietis"),
+                PetType = new PetType(){Name = "sdaf"},
                 BirthDate = Convert.ToDateTime("1999.01.01"),
                 SoldDate = Convert.ToDateTime("1999.02.02"),
                 Color = "Black",
                 Price = 421.20,
+                Customer = new Customer(){Id = 2}
             };
             FakeDB.Pets.Add(pet1);
             
@@ -28,11 +29,12 @@ namespace ClassLibrary1Infrastructure.Repositories
             {
                 Id = FakeDB.petId++,
                 Name = "Enzo",
-               // PetType = _petTypeService.NewPetType("Atejunas"),
+                PetType = new PetType(){Name = "sdaf"},
                 BirthDate = Convert.ToDateTime("1999.01.01"),
                 SoldDate = Convert.ToDateTime("1999.02.02"),
                 Color = "Hybrid",
-                Price = 821.20
+                Price = 821.20,
+                Customer = new Customer(){Id = 1}
             };
             FakeDB.Pets.Add(pet2);
             
@@ -40,7 +42,7 @@ namespace ClassLibrary1Infrastructure.Repositories
             {
                 Id = FakeDB.petId++,
                 Name = "Tidfsgka",
-               // PetType = _petTypeService.NewPetType("asd"),
+                PetType = new PetType(){Name = "sdaf"},
                 BirthDate = Convert.ToDateTime("1999.01.01"),
                 SoldDate = Convert.ToDateTime("1999.02.02"),
                 Color = "Hybrid",
@@ -52,29 +54,12 @@ namespace ClassLibrary1Infrastructure.Repositories
             {
                 Id = FakeDB.petId++,
                 Name = "Tisdfgfka",
-              //  PetType = _petTypeService.NewPetType("Chihhgwsfuaha"),
+                PetType = new PetType(){Name = "sdaf"},
                 BirthDate = Convert.ToDateTime("1999.01.01"),
                 SoldDate = Convert.ToDateTime("1999.02.02"),
                 Color = "Hybrid",
                 Price = 221.20,
-                Customer = new Customer()
-                {
-                    FirstName = "asdfasdf",
-                    LastName = "asdfasdf",
-                    Address = "sdfasdfa",
-                    PhoneNumber = "asdfasdf",
-                    Pets = new List<Pet>()
-                    {
-                        Create(new Pet()
-                        {
-                            Name = "sdfadfa",
-                        }),
-                        Create(new Pet()
-                        {
-                            Name = "asdfasdf"
-                        })
-                    }
-                }
+                Customer = new Customer(){Id = 1}
             };
             FakeDB.Pets.Add(pet4);
             
@@ -82,7 +67,7 @@ namespace ClassLibrary1Infrastructure.Repositories
             {
                 Id = FakeDB.petId++,
                 Name = "Tikaa",
-              //  PetType = _petTypeService.NewPetType("sadfa"),
+                PetType = new PetType(){Name = "sdaf"},
                 BirthDate = Convert.ToDateTime("1999.01.01"),
                 SoldDate = Convert.ToDateTime("1999.02.02"),
                 Color = "Hybrid",
@@ -94,7 +79,7 @@ namespace ClassLibrary1Infrastructure.Repositories
             {
                 Id = FakeDB.petId++,
                 Name = "Tika",
-              //  PetType = _petTypeService.NewPetType("Chihuaha"),
+                PetType = new PetType(){Name = "sdaf"},
                 BirthDate = Convert.ToDateTime("1999.01.01"),
                 SoldDate = Convert.ToDateTime("1999.02.02"),
                 Color = "Hybrid",
