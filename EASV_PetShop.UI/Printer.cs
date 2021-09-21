@@ -11,7 +11,6 @@ namespace EASV_PetShop.UI
         private readonly ICustomerService _customerService;
         private readonly IPetService _petService;
         private readonly IPetTypeService _petTypeService;
-        private readonly IOwnerService _ownerService;
         private string[] _currentMenu;
 
         #region stringMenuItems
@@ -48,14 +47,12 @@ namespace EASV_PetShop.UI
 
         #endregion
         
-        public Printer(ICustomerService customerService, IPetService petService, IPetTypeService petTypeService, IOwnerService ownerService)
+        public Printer(ICustomerService customerService, IPetService petService, IPetTypeService petTypeService)
         {
-            _ownerService = ownerService;
             _customerService = customerService;
             _petService = petService;
             _petTypeService = petTypeService;
             _currentMenu = _mainMenu;
-            InitData();
         }
 
         #region StartUI
@@ -195,9 +192,7 @@ namespace EASV_PetShop.UI
                     DateTime soldDate = Convert.ToDateTime(AskQuestion("Sold Date:"));
                     var color = AskQuestion("Color:");
                     double price = Convert.ToDouble(AskQuestion("Price:"));
-                    Owner newOwner = _ownerService.CreateOwner(AddOwner()); 
-                    var pet = _petService.NewPet(name,type,birthdate,soldDate,color,price,newOwner);
-                    _petService.CreatePet(pet);
+                    _petService.CreatePet(new Pet());
                     break;
                 case 4 :
                     var id = PrintFindById();
@@ -213,7 +208,6 @@ namespace EASV_PetShop.UI
                     DateTime newSoldDate = Convert.ToDateTime(AskQuestion("Phone Number:"));
                     var newColor = AskQuestion("Email:");
                     Double newPrice = Convert.ToDouble(AskQuestion("Email:"));
-                    Owner previousOwner = _ownerService.CreateOwner(AddOwner());
                     _petService.UpdatePet(new Pet()
                     {
                         Id = idForEdit,
@@ -223,7 +217,6 @@ namespace EASV_PetShop.UI
                         SoldDate = newSoldDate,
                         Color = newColor,
                         Price = newPrice,
-                        Owner = previousOwner
                     });
                     break;
                 case 6 :
@@ -234,18 +227,6 @@ namespace EASV_PetShop.UI
                     break;
                         
             }
-        }
-
-        private Owner AddOwner()
-        {
-            var previousOwnerFirsName = AskQuestion("First Name:");
-            var previousOwnerLastName = AskQuestion("Last Name:");
-            var previousOwnerAddress = AskQuestion("Address:");
-            var previousOwnerPhoneNumber = AskQuestion("Phone Number:");
-            var previousOwnerEmail = AskQuestion("Email:");
-            var previousOwner = _ownerService.NewOwner(previousOwnerFirsName,previousOwnerLastName,previousOwnerAddress,previousOwnerPhoneNumber,previousOwnerEmail);
-            _ownerService.CreateOwner(previousOwner);
-            return previousOwner;
         }
 
         private void GetFiveCheapestPets()
@@ -292,12 +273,6 @@ namespace EASV_PetShop.UI
             {
                 Console.WriteLine($"Id:{pet.Id} Name:{pet.Name} Type:{pet.PetType.Name} "+
                                   $"Birthdate:{pet.BirthDate} SoldDate:{pet.SoldDate} Color:{pet.Color} Price:{pet.Price}");
-                if (pet.Owner != null)
-                {
-                    Console.WriteLine($"Id:{pet.Owner.Id} First Name:{pet.Owner.FirstName} Last Name:{pet.Owner.LastName} "+
-                                      $"Customer address:{pet.Owner.Address} Email:{pet.Owner.Email} Phone number:{pet.Owner.PhoneNumber}");
-                    Console.WriteLine("");
-                }
             }
         }
         
@@ -360,89 +335,5 @@ namespace EASV_PetShop.UI
             Console.WriteLine(question);
             return Console.ReadLine();
         }
-
-        #region DataInitialization
-
-        private void InitData()
-        {
-
-            _petService.CreatePet(new Pet()
-            {
-                Name = "Kaira",
-                PetType = _petTypeService.NewPetType("Vokietis"),
-                BirthDate = Convert.ToDateTime("1999.01.01"),
-                SoldDate = Convert.ToDateTime("1999.02.02"),
-                Color = "Black",
-                Price = 421.20,
-                Owner = _ownerService.CreateOwner(new Owner()
-                {
-                    FirstName = "Ding",
-                    LastName = "Kong",
-                    Address = "Chris Cross street 41",
-                    Email = "Donk@Kong.com",
-                    PhoneNumber = "987654321" 
-                })
-            });
-            
-            _petService.CreatePet( new Pet()
-            {
-                Name = "Enzo",
-                PetType = _petTypeService.NewPetType("Atejunas"),
-                BirthDate = Convert.ToDateTime("1999.01.01"),
-                SoldDate = Convert.ToDateTime("1999.02.02"),
-                Color = "Hybrid",
-                Price = 821.20
-            });
-            
-            _petService.CreatePet( new Pet()
-            {
-                Name = "Tidfsgka",
-                PetType = _petTypeService.NewPetType("asd"),
-                BirthDate = Convert.ToDateTime("1999.01.01"),
-                SoldDate = Convert.ToDateTime("1999.02.02"),
-                Color = "Hybrid",
-                Price = 621.20,
-                Owner = _ownerService.CreateOwner(new Owner()
-                {
-                FirstName = "Ding",
-                LastName = "Kong",
-                Address = "Chris Cross street 41",
-                Email = "Donk@Kong.com",
-                PhoneNumber = "987654321" 
-            })
-            });
-            
-            _petService.CreatePet( new Pet()
-            {
-                Name = "Tisdfgfka",
-                PetType = _petTypeService.NewPetType("Chihhgwsfuaha"),
-                BirthDate = Convert.ToDateTime("1999.01.01"),
-                SoldDate = Convert.ToDateTime("1999.02.02"),
-                Color = "Hybrid",
-                Price = 221.20
-            });
-            
-            _petService.CreatePet( new Pet()
-            {
-                Name = "Tikaa",
-                PetType = _petTypeService.NewPetType("sadfa"),
-                BirthDate = Convert.ToDateTime("1999.01.01"),
-                SoldDate = Convert.ToDateTime("1999.02.02"),
-                Color = "Hybrid",
-                Price = 121.20
-            });
-            
-            _petService.CreatePet( new Pet()
-            {
-                Name = "Tika",
-                PetType = _petTypeService.NewPetType("Chihuaha"),
-                BirthDate = Convert.ToDateTime("1999.01.01"),
-                SoldDate = Convert.ToDateTime("1999.02.02"),
-                Color = "Hybrid",
-                Price = 921.20
-            });
-        }
-        
-        #endregion
     }
 }

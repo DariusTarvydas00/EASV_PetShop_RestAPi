@@ -6,20 +6,17 @@ namespace ClassLibrary1Infrastructure.Repositories
 {
     public class PetTypeRepository: IPetTypeRepository
     {
-        private static int _id = 1;
-        private static readonly List<PetType> PetTypes = new List<PetType>();
-        private IPetTypeRepository _petTypeRepositoryImplementation;
 
         public PetType Create(PetType petType)
         {
-            petType.Id = _id++;
-            PetTypes.Add(petType);
+            petType.Id = FakeDB.id++;
+            FakeDB.PetTypes.Add(petType);
             return petType;
         }
 
         public PetType GetPetType(string petTypeName)
         {
-            foreach (var petType in PetTypes)
+            foreach (var petType in FakeDB.PetTypes)
             {
                 if (petType.Name.Equals(petType))
                 {

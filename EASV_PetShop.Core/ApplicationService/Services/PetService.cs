@@ -25,8 +25,7 @@ namespace EASV_PetShop.Core.ApplicationService.Services
             return _petRepository.Create(pet);
         }
 
-        public Pet NewPet(string name, PetType type, DateTime birthdate, DateTime soldDate, string color, double price,
-            Owner newOwner)
+        public Pet NewPet(string name, PetType type, DateTime birthdate, DateTime soldDate, string color, double price, Customer customer)
         {
             var pet = new Pet()
             {

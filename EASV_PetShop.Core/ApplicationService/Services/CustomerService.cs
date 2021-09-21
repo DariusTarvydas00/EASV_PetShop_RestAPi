@@ -66,5 +66,7 @@ namespace EASV_PetShop.Core.ApplicationService.Services
         {
             return _customerRepository.Delete(id);
         }
+
+        public List<Pet> Pets { get; set; }
     }
 }

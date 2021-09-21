@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection.PortableExecutable;
 using EASV_PetShop.Core.Entity;
 
 namespace EASV_PetShop.Core.DomainService
@@ -10,5 +11,6 @@ namespace EASV_PetShop.Core.DomainService
         IEnumerable<Customer> ReadAll();
         Customer Update(Customer customerUpdate);
         Customer Delete(int id);
+        IEnumerable<Pet> ReadAllPets();
     }
 }

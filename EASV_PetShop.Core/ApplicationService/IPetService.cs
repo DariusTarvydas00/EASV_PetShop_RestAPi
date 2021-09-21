@@ -9,8 +9,7 @@ namespace EASV_PetShop.Core.ApplicationService
         List<Pet> GetAllPets();
         Pet CreatePet(Pet pet);
 
-        Pet NewPet(string name, PetType type, DateTime birthdate, DateTime soldDate, string color, double price,
-            Owner newOwner);
+        Pet NewPet(string name, PetType type, DateTime birthdate, DateTime soldDate, string color, double price, Customer customer);
         Pet DeletePet(int id);
         Pet FindPetById(int idForEdit);
         Pet UpdatePet(Pet pet);

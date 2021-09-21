@@ -25,6 +25,8 @@ namespace EASV_PetShop_RestAPi
         {
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IPetRepository, PetRepository>();
+            services.AddScoped<IPetService, PetService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

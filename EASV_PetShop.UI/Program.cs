@@ -12,17 +12,12 @@ namespace EASV_PetShop.UI
         private static void Main()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddScoped<ICustomerRepository, CustomerRepository>();
-            serviceCollection.AddScoped<ICustomerService, CustomerService>();
             
             serviceCollection.AddScoped<IPetRepository, PetRepository>();
             serviceCollection.AddScoped<IPetService, PetService>();
 
             serviceCollection.AddScoped<IPetTypeRepository, PetTypeRepository>();
             serviceCollection.AddScoped<IPetTypeService, PetTypeService>();
-
-            serviceCollection.AddScoped<IOwnerRepository, OwnerRepository>();
-            serviceCollection.AddScoped<IOwnerService, OwnerSerivce>();
             
             serviceCollection.AddScoped<IPrinter, Printer>();
             

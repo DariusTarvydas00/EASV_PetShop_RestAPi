@@ -7,5 +7,11 @@ namespace ClassLibrary1Infrastructure
     {
         public static int id = 1;
         public static List<Customer> Customers = new List<Customer>();
+        
+        public static int petId = 1;
+        public static List<Pet> Pets = new List<Pet>();
+        
+        public static int petTypeId = 1;
+        public static List<PetType> PetTypes = new List<PetType>();
     }
 }

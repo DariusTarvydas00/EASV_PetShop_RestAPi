@@ -12,5 +12,6 @@ namespace EASV_PetShop.Core.ApplicationService
         public List<Customer> GetAllByFirstName(string name);
         Customer UpdateCustomer(Customer customerUpdate);
         Customer DeleteCustomer(int id);
+        public List<Pet> Pets { get; set; }
     }
 }

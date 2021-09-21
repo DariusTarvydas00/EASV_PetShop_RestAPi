@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using EASV_PetShop.Core.ApplicationService;
 using EASV_PetShop.Core.Entity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace EASV_PetShop_RestAPi.Controllers
 {

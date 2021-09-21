@@ -29,7 +29,14 @@ namespace ClassLibrary1Infrastructure.Repositories
                 LastName = "Kong",
                 Address = "Chris Cross street 41",
                 Email = "Donk@Kong.com",
-                PhoneNumber = "987654321"
+                PhoneNumber = "987654321",
+                Pets = new List<Pet>()
+                {
+                    new Pet()
+                    {
+                        Name = "sadfasdf",
+                    }
+                }
             };
             FakeDB.Customers.Add(customer2);
         }
@@ -82,6 +89,11 @@ namespace ClassLibrary1Infrastructure.Repositories
                 return customerFound;
             }
 
+            return null;
+        }
+
+        public IEnumerable<Pet> ReadAllPets()
+        {
             return null;
         }
     }
