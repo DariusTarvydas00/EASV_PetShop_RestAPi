@@ -42,8 +42,7 @@ namespace EASV_PetShop.Core.ApplicationService.Services
 
         public Customer FindCustomerByIdIncludeOrders(int id)
         {
-            var customer = _customerRepository.ReadById(id);
-            customer.Pets = _petRepository.ReadAll().Where(pet => pet.Id == customer.Id).ToList();
+            var customer = _customerRepository.ReadByIdIncludeOrders(id);
             return customer;
         }
 

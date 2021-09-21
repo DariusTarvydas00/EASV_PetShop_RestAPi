@@ -1,9 +1,13 @@
-using ClassLibrary1Infrastructure.Repositories;
+using System.Text.Json.Serialization;
 using EASV_PetShop.Core.ApplicationService;
 using EASV_PetShop.Core.ApplicationService.Services;
 using EASV_PetShop.Core.DomainService;
+using EASV_PetShop.Core.Entity;
+using EASV_PetShop_RestAPi.Infrastructure.Data;
+using EASV_PetShop_RestAPi.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,10 +27,17 @@ namespace EASV_PetShop_RestAPi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // services.AddDbContext<CustomerAppContext>(
+            //     opt => opt.UseInMemoryDatabase("ThatDb"));
+            services.AddDbContext<CustomerAppContext>(opt => opt.UseSqlite("Data Source=customerApp.db"));
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -42,6 +53,15 @@ namespace EASV_PetShop_RestAPi
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EASV_PetShop_RestAPi v1"));
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<CustomerAppContext>();
+                    DBInitializer.SeedDB(ctx);
+                }
+            }
+            else
+            {
+                app.UseHsts();
             }
 
             //app.UseHttpsRedirection();

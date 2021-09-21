@@ -92,5 +92,10 @@ namespace ClassLibrary1Infrastructure.Repositories
         {
             return null;
         }
+
+        public Customer ReadByIdIncludeOrders(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

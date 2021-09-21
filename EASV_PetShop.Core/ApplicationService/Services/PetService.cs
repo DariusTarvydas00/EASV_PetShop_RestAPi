@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using EASV_PetShop.Core.DomainService;
 using EASV_PetShop.Core.Entity;
@@ -9,9 +10,11 @@ namespace EASV_PetShop.Core.ApplicationService.Services
     public class PetService: IPetService
     {
         readonly IPetRepository _petRepository;
+        readonly ICustomerRepository _customerRepository;
 
-        public PetService(IPetRepository petRepository)
+        public PetService(IPetRepository petRepository, ICustomerRepository customerRepository)
         {
+            _customerRepository = customerRepository;
             _petRepository = petRepository;
         }
 
@@ -22,6 +25,16 @@ namespace EASV_PetShop.Core.ApplicationService.Services
 
         public Pet CreatePet(Pet pet)
         {
+            if (pet.Customer == null || pet.Customer.Id <= 0)
+            {
+                throw new InvalidDataException("To create Pet you need a Customer");
+            }
+
+            if (_customerRepository.ReadById(pet.Customer.Id) == null)
+            {
+                throw new InvalidDataException("Customer not Found");
+            }
+
             return _petRepository.Create(pet);
         }
 

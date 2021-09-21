@@ -12,5 +12,6 @@ namespace EASV_PetShop.Core.DomainService
         Customer Update(Customer customerUpdate);
         Customer Delete(int id);
         IEnumerable<Pet> ReadAllPets();
+        Customer ReadByIdIncludeOrders(int id);
     }
 }
